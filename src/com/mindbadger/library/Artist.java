@@ -2,7 +2,7 @@ package com.mindbadger.library;
 
 import java.util.Map;
 
-public class Artist {
+public class Artist implements Comparable {
   private long id;
   private String name;
   private Map<String, Album> albums;
@@ -24,5 +24,15 @@ public class Artist {
   }
   public void setAlbums(Map<String, Album> albums) {
     this.albums = albums;
+  }
+  
+  @Override
+  public int compareTo(Object o) {
+    if (!(o instanceof Artist)) {
+      throw new ClassCastException("I'm expecting you to compare me to an Artist");
+    }
+    
+    Artist artistToCompareTo = (Artist) o;
+    return this.name.compareTo(artistToCompareTo.getName());
   }
 }
